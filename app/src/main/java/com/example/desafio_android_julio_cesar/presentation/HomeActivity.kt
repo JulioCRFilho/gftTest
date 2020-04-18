@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.desafio_android_julio_cesar.R
 import com.example.desafio_android_julio_cesar.interactor.HomeInteractor
-import com.example.desafio_android_julio_cesar.presentation.adapter.HomeAdapter
+import com.example.desafio_android_julio_cesar.presentation.pagedList.HomePagedAdapter
 import com.example.desafio_android_julio_cesar.utils.BaseActivity
 import com.example.desafio_android_julio_cesar.utils.CustomDialog
 import com.example.desafio_android_julio_cesar.viewModel.HomeViewModel
@@ -24,16 +24,19 @@ class HomeActivity : BaseActivity(), HomeInteractor.View {
 
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModel.homeInteractor = this
-        viewModel.loadChars(this)
 
         viewModel.charactersLiveData.observe(this, Observer { list ->
+            val homeAdapter = HomePagedAdapter { char ->
+                viewModel.characterDetails(this, char)
+            }
+
             with(recyclerView) {
                 layoutManager = LinearLayoutManager(this@HomeActivity, RecyclerView.VERTICAL, false)
                 setHasFixedSize(true)
-                adapter = HomeAdapter(this@HomeActivity, list) { char ->
-                    viewModel.characterDetails(context, char)
-                }
+                adapter = homeAdapter
             }
+
+            homeAdapter.submitList(list)
         })
     }
 

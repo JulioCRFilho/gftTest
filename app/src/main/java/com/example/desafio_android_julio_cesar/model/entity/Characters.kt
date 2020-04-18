@@ -10,7 +10,7 @@ data class CharactersResponse (
 
 data class Container (
     @SerializedName("results")
-    var results: List<Character?>? = null
+    var results: MutableList<Character>? = null
 ): Serializable
 
 data class Character (
