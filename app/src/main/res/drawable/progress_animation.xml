@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <item android:gravity="center">
+
+        <animated-rotate
+            android:drawable="@drawable/image_progress_great"
+            android:pivotX="50%"
+            android:pivotY="50%" />
+    </item>
+</layer-list>
