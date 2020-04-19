@@ -9,25 +9,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.desafio_android_julio_cesar.R
 import kotlinx.android.synthetic.main.dialog_loading.*
+import java.lang.Thread.sleep
 
-class CustomDialog(context: Context, private val liveData: MutableLiveData<Pair<Int, String?>>, private val owner: LifecycleOwner) : Dialog(context) {
+open class CustomDialog(context: Context, private val error: String) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_loading)
         window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-        liveData.observe(owner, Observer {
-            viewFlipper.displayedChild = it.first
+        failMsg.text = error
 
-            this.setCancelable(it.first != 0)
-
-            it.second?.let { msg ->
-                failMsg.text = msg
-            }
-
-            if(it.first == 1) {
-                this.dismiss()
-            }
-        })
+        Thread {
+            sleep(4500)
+            this.dismiss()
+        }.start()
     }
 }

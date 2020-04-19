@@ -1,6 +1,7 @@
 package com.example.desafio_android_julio_cesar.model.api
 
 import com.example.desafio_android_julio_cesar.model.entity.CharactersResponse
+import com.example.desafio_android_julio_cesar.model.entity.ComicsResponse
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -8,6 +9,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -22,6 +24,14 @@ interface MarvelApi {
         @Query("apikey") apikey: String,
         @Query("hash") hash: String
     ): Call<CharactersResponse>
+
+    @GET("v1/public/characters/{characterId}/comics")
+    fun getComics(
+        @Path("characterId") characterId: Int,
+        @Query("ts") ts: String,
+        @Query("apikey") apikey: String,
+        @Query("hash") hash: String
+    ): Call<ComicsResponse>
 
     companion object {
         fun builder(): Retrofit {

@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".presentation.HQActivity"></activity>
         <activity android:name=".presentation.CharacterDetailsActivity" />
         <activity android:name=".presentation.HomeActivity">
             <intent-filter>
@@ -20,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".utils.BaseActivity" android:parentActivityName=".presentation.HomeActivity" />
+        <activity android:name=".utils.BaseActivity" />
     </application>
 
 </manifest>

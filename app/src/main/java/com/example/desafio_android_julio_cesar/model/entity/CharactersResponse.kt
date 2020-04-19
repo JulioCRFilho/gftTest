@@ -18,6 +18,8 @@ data class Character (
     var id: Int? = null,
     @SerializedName("name")
     var name: String? = null,
+    @SerializedName("description")
+    var description: String? = null,
     @SerializedName("thumbnail")
     var thumbnail: CharImage? = null
 ): Serializable
