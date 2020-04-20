@@ -12,16 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentation.HQActivity"></activity>
-        <activity android:name=".presentation.CharacterDetailsActivity" />
-        <activity android:name=".presentation.HomeActivity">
+        <activity android:name=".utils.BaseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".utils.BaseActivity" />
     </application>
 
 </manifest>

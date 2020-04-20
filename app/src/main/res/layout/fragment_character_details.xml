@@ -6,14 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center|top"
     android:orientation="vertical"
-    tools:context=".presentation.CharacterDetailsActivity">
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/include_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".presentation.CharacterDetailsFragment">
 
     <ImageView
         android:id="@+id/heroPic"
@@ -23,7 +16,7 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         tools:src="@mipmap/ic_launcher_round" />
 
     <TextView

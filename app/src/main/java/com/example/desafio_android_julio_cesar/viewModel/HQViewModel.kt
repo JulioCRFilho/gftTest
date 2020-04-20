@@ -15,7 +15,7 @@ import kotlin.random.Random
 class HQViewModel : ViewModel() {
     var hqLiveData: MutableLiveData<Comic> = MutableLiveData()
     var mostExpensiveHqPrice: Float? = null
-    lateinit var interactor: Interactor.View
+    lateinit var interactor: Interactor.UI
 
     private val ts = Random(654).nextLong().toString()
     private val apikey = "5259659b9a1ed3019e42c862b91db8e2"

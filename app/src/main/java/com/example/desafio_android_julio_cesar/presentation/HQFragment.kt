@@ -1,32 +1,41 @@
 package com.example.desafio_android_julio_cesar.presentation
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.desafio_android_julio_cesar.Interactor
 import com.example.desafio_android_julio_cesar.R
 import com.example.desafio_android_julio_cesar.utils.BaseActivity
 import com.example.desafio_android_julio_cesar.utils.CustomDialog
+import com.example.desafio_android_julio_cesar.utils.setToolbar
 import com.example.desafio_android_julio_cesar.viewModel.HQViewModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_hq.*
-import kotlinx.android.synthetic.main.include_toolbar.toolbar
+import kotlinx.android.synthetic.main.fragment_hq.*
 
-class HQActivity : BaseActivity(), Interactor.View {
-    lateinit var viewModel: HQViewModel
+class HQFragment : Fragment(), Interactor.UI {
+    private val args: HQFragmentArgs by navArgs()
+    private lateinit var viewModel: HQViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hq)
-        setToolbar(toolbar, "Detalhes da HQ")
         viewModel = ViewModelProvider(this).get(HQViewModel::class.java)
-        val id = intent.getIntExtra("id", 0)
-        viewModel.getHQ(id)
+        viewModel.getHQ(args.idHQ)
         viewModel.interactor = this
+    }
 
-        viewModel.hqLiveData.observe(this, Observer { comic ->
+    override fun onCreateView(i: LayoutInflater, v: ViewGroup?, s: Bundle?): View? {
+        return i.inflate(R.layout.fragment_hq, v, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setToolbar("Detalhes da HQ")
+        viewModel.hqLiveData.observe(viewLifecycleOwner, Observer { comic ->
             HqName.text = comic?.title
             HqPrice.text = "$ ${viewModel.mostExpensiveHqPrice}"
 
@@ -44,15 +53,5 @@ class HQActivity : BaseActivity(), Interactor.View {
         })
     }
 
-    companion object {
-        fun launch(context: Context, id: Int?) {
-            val intent = Intent(context, HQActivity::class.java)
-            intent.putExtra("id", id)
-            context.startActivity(intent)
-        }
-    }
-
-    override fun onError(msg: String) {
-        CustomDialog(this, msg).show()
-    }
+    override fun onError(msg: String) = context?.let { CustomDialog(it, msg).show() }
 }
