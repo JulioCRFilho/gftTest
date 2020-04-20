@@ -1,3 +1,3 @@
 # gftTest
 
-GFT challenge request Marvel API with PagedListAdapter using LiveData in architeture MVVM.
+GFT challenge: Marvel API, PagedAdapter, DataSource, LiveData, Navigation Component, SafeArgs. Architecture MVVM following single activity application from Google's guidelines.
